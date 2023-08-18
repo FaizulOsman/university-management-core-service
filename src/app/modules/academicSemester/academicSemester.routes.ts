@@ -11,4 +11,6 @@ router.post(
   AcademicSemesterController.insertIntoDB
 );
 
+router.get('/', AcademicSemesterController.getAllFromDB);
+
 export const AcademicSemesterRoutes = router;
