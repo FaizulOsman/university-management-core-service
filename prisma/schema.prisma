@@ -20,15 +20,19 @@ model AcademicSemester {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
+  students Student[]
+
   @@map("academic_semesters")
 }
 
 model AcademicFaculty {
-  id                  String               @id @default(uuid())
-  title               String
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   academicDepartments AcademicDepartment[]
+  studentS            Student[]
 
   @@map("academic_faculty")
 }
@@ -41,6 +45,8 @@ model AcademicDepartment {
 
   academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
+
+  students Student[]
 
   @@map("academic_department")
 }
@@ -58,6 +64,15 @@ model Student {
   bloodGroup   String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  academicSemester   AcademicSemester @relation(fields: [academicSemesterId], references: [id])
+  academicSemesterId String
+
+  academicDepartment   AcademicDepartment @relation(fields: [academicDepartmentId], references: [id])
+  academicDepartmentId String
+
+  academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
+  academicFacultyId String
 
   @@map("students")
 }
