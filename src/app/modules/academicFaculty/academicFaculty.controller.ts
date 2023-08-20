@@ -1,78 +1,71 @@
-import { AcademicSemester } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { AcademicSemesterFilterableFields } from './academicSemester.constants';
-import { AcademicSemesterService } from './academicSemester.service';
+import { academicFacultyFilterableFields } from './academicFaculty.constants';
+import { AcademicFacultyService } from './academicFaculty.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await AcademicSemesterService.insertIntoDB(req.body);
-
-  sendResponse<AcademicSemester>(res, {
+  const result = await AcademicFacultyService.insertIntoDB(req.body);
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester Created!',
+    message: 'AcademicFaculty created successfully',
     data: result,
   });
 });
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, AcademicSemesterFilterableFields);
+  const filters = pick(req.query, academicFacultyFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-
-  console.log('Filters', filters);
-  console.log('Options', options);
-  const result = await AcademicSemesterService.getAllFromDB(filters, options);
-
+  const result = await AcademicFacultyService.getAllFromDB(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester Retrieved Successfully!',
+    message: 'AcademicFaculties fetched successfully',
     meta: result.meta,
     data: result.data,
   });
 });
 
-const getDataById = catchAsync(async (req: Request, res: Response) => {
-  const result = await AcademicSemesterService.getDataById(req.params.id);
-
-  sendResponse<AcademicSemester>(res, {
+const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await AcademicFacultyService.getByIdFromDB(id);
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester Retrieved Successfully!',
+    message: 'AcademicFaculty fetched successfully',
     data: result,
   });
 });
 
 const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await AcademicSemesterService.updateOneInDB(id, req.body);
-
+  const result = await AcademicFacultyService.updateOneInDB(id, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester updated successfully',
+    message: 'AcademicFaculty updated successfully',
     data: result,
   });
 });
 
 const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await AcademicSemesterService.deleteByIdFromDB(id);
-
+  const result = await AcademicFacultyService.deleteByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester delete successfully',
+    message: 'AcademicFaculty delete successfully',
     data: result,
   });
 });
-export const AcademicSemesterController = {
+
+export const AcademicFacultyController = {
   insertIntoDB,
   getAllFromDB,
-  getDataById,
+  getByIdFromDB,
   updateOneInDB,
   deleteByIdFromDB,
 };

@@ -88,6 +88,7 @@ const updateOneInDB = async (
     },
     data: payload,
   });
+
   return result;
 };
 
@@ -97,6 +98,7 @@ const deleteByIdFromDB = async (id: string): Promise<AcademicSemester> => {
       id,
     },
   });
+
   return result;
 };
 
