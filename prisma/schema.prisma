@@ -108,6 +108,7 @@ model Building {
   title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  rooms     Room[]
 
   @@map("buildings")
 }
@@ -118,6 +119,9 @@ model Room {
   floor      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  building   Building @relation(fields: [buildingId], references: [id])
+  buildingId String
 
   @@map("rooms")
 }
