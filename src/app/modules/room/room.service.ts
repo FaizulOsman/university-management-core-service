@@ -7,7 +7,7 @@ import {
   roomRelationalFields,
   roomRelationalFieldsMapper,
   roomSearchableFields,
-} from './room.constant';
+} from './room.constants';
 import { IRoomFilterRequest } from './room.interface';
 
 const insertIntoDB = async (data: Room): Promise<Room> => {

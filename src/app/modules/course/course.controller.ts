@@ -3,27 +3,28 @@ import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { roomFilterableFields } from './room.constants';
-import { RoomService } from './room.service';
+import { courseFilterableFields } from './course.constants';
+import { CourseService } from './course.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await RoomService.insertIntoDB(req.body);
+  console.log(req.body);
+  const result = await CourseService.insertIntoDB(req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Room created successfully',
+    message: 'Course created successfully',
     data: result,
   });
 });
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, roomFilterableFields);
+  const filters = pick(req.query, courseFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-  const result = await RoomService.getAllFromDB(filters, options);
+  const result = await CourseService.getAllFromDB(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Rooms fetched successfully',
+    message: 'Courses fetched successfully',
     meta: result.meta,
     data: result.data,
   });
@@ -31,41 +32,40 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
 
 const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await RoomService.getByIdFromDB(id);
+  const result = await CourseService.getByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Room fetched successfully',
+    message: 'Course fetched successfully',
     data: result,
   });
 });
 
-const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await RoomService.updateOneInDB(id, req.body);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Room updated successfully',
-    data: result,
-  });
-});
+// const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
+//     const { id } = req.params;
+//     const result = await CourseService.updateOneInDB(id, req.body);
+//     sendResponse(res, {
+//         statusCode: httpStatus.OK,
+//         success: true,
+//         message: 'Course updated successfully',
+//         data: result
+//     });
+// })
 
 const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await RoomService.deleteByIdFromDB(id);
+  const result = await CourseService.deleteByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Room deleted successfully',
+    message: 'Course deleted successfully',
     data: result,
   });
 });
 
-export const RoomController = {
+export const CourseController = {
   insertIntoDB,
   getAllFromDB,
   getByIdFromDB,
-  updateOneInDB,
   deleteByIdFromDB,
 };
