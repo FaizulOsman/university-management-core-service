@@ -11,15 +11,19 @@ import { ICourseCreateData, ICourseFilterRequest } from './course.interface';
 const insertIntoDB = async (data: ICourseCreateData): Promise<any> => {
   const { preRequisiteCourses, ...courseData } = data;
 
+  // Create transaction to completing all task
   const newCourse = await prisma.$transaction(async transactionClient => {
+    // Task 1 = Create Course
     const result = await transactionClient.course.create({
       data: courseData,
     });
 
+    // Throw error if result will not create
     if (!result) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to create course');
     }
 
+    // Task 2 = Make PreRequisite Course
     if (preRequisiteCourses && preRequisiteCourses.length > 0) {
       for (let index = 0; index < preRequisiteCourses.length; index++) {
         const createPrerequisite =
@@ -35,6 +39,7 @@ const insertIntoDB = async (data: ICourseCreateData): Promise<any> => {
     return result;
   });
 
+  // if transaction will complete and create newCourse it will apply
   if (newCourse) {
     const responseData = await prisma.course.findUnique({
       where: {
@@ -57,6 +62,7 @@ const insertIntoDB = async (data: ICourseCreateData): Promise<any> => {
     return responseData;
   }
 
+  // if anything will not apply it will throw error
   throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to create course');
 };
 
