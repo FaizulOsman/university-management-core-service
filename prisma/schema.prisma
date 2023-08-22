@@ -11,28 +11,26 @@ datasource db {
 }
 
 model AcademicSemester {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   year       Int
   title      String
   code       String
   startMonth String
   endMonth   String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  students Student[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  students   Student[]
 
   @@map("academic_semesters")
 }
 
 model AcademicFaculty {
-  id        String   @id @default(uuid())
-  title     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id                  String               @id @default(uuid())
+  title               String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
   academicDepartments AcademicDepartment[]
-  studentS            Student[]
+  students            Student[]
   faculties           Faculty[]
 
   @@map("academic_faculty")
@@ -46,11 +44,10 @@ model AcademicDepartment {
 
   academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
+  students          Student[]
+  faculties         Faculty[]
 
-  students  Student[]
-  faculties Faculty[]
-
-  @@map("academic_department")
+  @@map("academic_departments")
 }
 
 model Student {
@@ -127,19 +124,19 @@ model Room {
 }
 
 model Course {
-  id              String                @id @default(uuid())
+  id              String                 @id @default(uuid())
   title           String
   code            String
-  credits         Int                   @default(0)
-  createdAt       DateTime              @default(now())
-  updatedAt       DateTime              @updatedAt
-  preRequisite    CourseToPrerequeste[] @relation("CourseToPrerequisite")
-  preRequisiteFor CourseToPrerequeste[] @relation("PrerequisiteToCourse")
+  credits         Int                    @default(0)
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  preRequisite    CourseToPrerequisite[] @relation("CourseToPrerequisite")
+  preRequisiteFor CourseToPrerequisite[] @relation("PrerequisiteToCourse")
 
   @@map("courses")
 }
 
-model CourseToPrerequeste {
+model CourseToPrerequisite {
   courseId       String
   preRequisiteId String
 
