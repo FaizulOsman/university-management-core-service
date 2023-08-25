@@ -16,7 +16,6 @@ router.post(
   CourseController.insertIntoDB
 );
 
-/// I intend to explore the update course functionalities in the upcoming module.
 router.patch(
   '/:id',
   validateRequest(CourseValidation.update),
@@ -28,6 +27,12 @@ router.delete(
   '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   CourseController.deleteByIdFromDB
+);
+
+router.post(
+  '/:id/assign-faculties',
+  // auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+  CourseController.assignFaculties
 );
 
 export const courseRoutes = router;
