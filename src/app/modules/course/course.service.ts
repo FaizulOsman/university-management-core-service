@@ -193,25 +193,31 @@ const updateOneInDB = async (
           coursePrerequisite && !coursePrerequisite.isDeleted
       );
 
-      for (let i = 0; i < deletePrerequisite.length; i++) {
-        await transactionClient.courseToPrerequisite.deleteMany({
-          where: {
-            AND: [
-              { courseId: id },
-              { preRequisiteId: deletePrerequisite[i].courseId },
-            ],
-          },
-        });
-      }
+      await asyncForEach(
+        deletePrerequisite,
+        async (deletePreCourse: IPreRequisiteCourseRequest) => {
+          await transactionClient.courseToPrerequisite.deleteMany({
+            where: {
+              AND: [
+                { courseId: id },
+                { preRequisiteId: deletePreCourse.courseId },
+              ],
+            },
+          });
+        }
+      );
 
-      for (let i = 0; i < newPrerequisite.length; i++) {
-        await transactionClient.courseToPrerequisite.create({
-          data: {
-            courseId: id,
-            preRequisiteId: newPrerequisite[i].courseId,
-          },
-        });
-      }
+      await asyncForEach(
+        newPrerequisite,
+        async (insertPreRequisite: IPreRequisiteCourseRequest) => {
+          await transactionClient.courseToPrerequisite.create({
+            data: {
+              courseId: id,
+              preRequisiteId: insertPreRequisite.courseId,
+            },
+          });
+        }
+      );
     }
 
     return result;
