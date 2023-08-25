@@ -2,10 +2,12 @@ export type ICourseCreateData = {
   title: string;
   code: string;
   credits: number;
-  preRequisiteCourses: {
-    courseId: string;
-    isDeleted?: null;
-  }[];
+  preRequisiteCourses: IPreRequisiteCourseRequest[];
+};
+
+export type IPreRequisiteCourseRequest = {
+  courseId: string;
+  isDeleted?: null;
 };
 
 export type ICourseFilterRequest = {
