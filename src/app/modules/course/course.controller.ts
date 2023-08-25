@@ -69,7 +69,18 @@ const assignFaculties = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Course Faculty Assigned successfully',
+    message: 'Course faculty assigned successfully',
+    data: result,
+  });
+});
+
+const removeFaculties = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await CourseService.removeFaculties(id, req.body.faculties);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Course faculty removed successfully',
     data: result,
   });
 });
@@ -81,4 +92,5 @@ export const CourseController = {
   updateOneInDB,
   deleteByIdFromDB,
   assignFaculties,
+  removeFaculties,
 };
