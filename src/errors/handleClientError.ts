@@ -34,5 +34,3 @@ const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
 };
 
 export default handleClientError;
-
-//"//\nInvalid `prisma.semesterRegistration.delete()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.",
