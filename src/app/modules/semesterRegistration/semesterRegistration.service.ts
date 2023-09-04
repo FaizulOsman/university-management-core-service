@@ -282,6 +282,18 @@ const enrollIntoCourse = async (
   );
 };
 
+const withdrewFromCourse = async (
+  authUserId: string,
+  payload: IEnrollCoursePayload
+): Promise<{
+  message: string;
+}> => {
+  return studentSemesterRegistrationCourseService.withdrewFromCourse(
+    authUserId,
+    payload
+  );
+};
+
 export const SemesterRegistrationService = {
   insertIntoDB,
   getAllFromDB,
@@ -290,4 +302,5 @@ export const SemesterRegistrationService = {
   deleteByIdFromDB,
   startMyRegistration,
   enrollIntoCourse,
+  withdrewFromCourse,
 };
