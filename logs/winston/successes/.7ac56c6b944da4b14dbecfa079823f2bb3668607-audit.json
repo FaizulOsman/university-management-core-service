@@ -24,6 +24,11 @@
             "date": 1693808492415,
             "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\successes\\phu-2023-04-09-12-success.log",
             "hash": "ca85894b828fb92e01d41b1c911ede62a4b0a9e205305ea0bbc3cfcc696fce98"
+        },
+        {
+            "date": 1693970363948,
+            "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\successes\\phu-2023-06-09-09-success.log",
+            "hash": "1bace62c9580f7ba3311f25756ba767a1ea64f78a752ec33f95773cc1d73597c"
         }
     ],
     "hashType": "sha256"
