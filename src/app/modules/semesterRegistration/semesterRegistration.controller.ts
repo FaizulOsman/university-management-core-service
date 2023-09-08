@@ -8,6 +8,7 @@ import { SemesterRegistrationService } from './semesterRegistration.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   const result = await SemesterRegistrationService.insertIntoDB(req.body);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -23,6 +24,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
     filters,
     options
   );
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -35,6 +37,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
 const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await SemesterRegistrationService.getByIdFromDB(id);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -46,6 +49,7 @@ const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
 const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await SemesterRegistrationService.updateOneInDB(id, req.body);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -57,6 +61,7 @@ const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
 const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await SemesterRegistrationService.deleteByIdFromDB(id);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -70,6 +75,7 @@ const startMyRegistration = catchAsync(async (req: Request, res: Response) => {
   const result = await SemesterRegistrationService.startMyRegistration(
     user.userId
   );
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -114,6 +120,7 @@ const confirmMyRegistration = catchAsync(
     const result = await SemesterRegistrationService.confirmMyRegistration(
       user.userId
     );
+
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -129,11 +136,23 @@ const getMyRegistration = catchAsync(async (req: Request, res: Response) => {
   const result = await SemesterRegistrationService.getMyRegistration(
     user.userId
   );
-  console.log(result);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'My registration data fatched!',
+    data: result,
+  });
+});
+
+const startNewSemester = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await SemesterRegistrationService.startNewSemester(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Semester Started Successfully!',
     data: result,
   });
 });
@@ -149,4 +168,5 @@ export const SemesterRegistrationController = {
   withdrawFromCourse,
   confirmMyRegistration,
   getMyRegistration,
+  startNewSemester,
 };
