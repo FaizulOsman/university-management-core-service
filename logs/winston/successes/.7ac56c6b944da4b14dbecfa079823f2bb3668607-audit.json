@@ -109,6 +109,16 @@
             "date": 1694873973408,
             "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\successes\\phu-2023-16-09-20-success.log",
             "hash": "e1a88d299e5c49e43ccccdfd5f40c3093493bdf441317ccb800b55020c676de7"
+        },
+        {
+            "date": 1694877770434,
+            "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\successes\\phu-2023-16-09-21-success.log",
+            "hash": "5dba44c02ebb930e2df05d3435a99bc755530169ec58cd6526120b6be1c659a5"
+        },
+        {
+            "date": 1694884313740,
+            "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\successes\\phu-2023-16-09-23-success.log",
+            "hash": "e0e795696d6cc1807d0fb5451256f8610ec9ffcf0ec649a7b8c7f81672aaba74"
         }
     ],
     "hashType": "sha256"

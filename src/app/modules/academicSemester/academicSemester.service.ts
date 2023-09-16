@@ -9,6 +9,8 @@ import { RedisClient } from '../../../shared/redis';
 import {
   AcademicSemesterSearchableFields,
   EVENT_ACADEMIC_SEMESTER_CREATED,
+  EVENT_ACADEMIC_SEMESTER_DELETED,
+  EVENT_ACADEMIC_SEMESTER_UPDATED,
   academicSemesterTitleCodeMapper,
 } from './academicSemester.constants';
 import { IAcademicSemesterFilterRequest } from './academicSemester.interface';
@@ -110,7 +112,12 @@ const updateOneInDB = async (
     },
     data: payload,
   });
-
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_SEMESTER_UPDATED,
+      JSON.stringify(result)
+    );
+  }
   return result;
 };
 
@@ -120,7 +127,12 @@ const deleteByIdFromDB = async (id: string): Promise<AcademicSemester> => {
       id,
     },
   });
-
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_SEMESTER_DELETED,
+      JSON.stringify(result)
+    );
+  }
   return result;
 };
 
