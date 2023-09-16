@@ -104,6 +104,11 @@
             "date": 1694871408899,
             "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\errors\\phu-2023-16-09-19-error.log",
             "hash": "96e5dd291427e1b64fe38dd3758e5bfac91d6263a3c0d7a19752255de5276c00"
+        },
+        {
+            "date": 1694873973444,
+            "name": "W:\\PH-NextLevel\\UM-core-service\\logs\\winston\\errors\\phu-2023-16-09-20-error.log",
+            "hash": "2c292f7c436c210dc0225bcb26b9f93f5f6eca3b79ec2246dd5f5e96e2490b24"
         }
     ],
     "hashType": "sha256"
